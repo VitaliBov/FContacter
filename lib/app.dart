@@ -13,10 +13,10 @@ class ContacterApp extends StatelessWidget {
                 theme: ThemeData.light(),
                 routes: <String, WidgetBuilder>{
                   '/': (BuildContext context) => model.isAuthorized()
-                      ? new MainScreen()
-                      : new WelcomeScreen(),
-                  '/login': (BuildContext context) => new WelcomeScreen(),
-                  '/main': (BuildContext context) => new MainScreen()
+                      ? MainScreen()
+                      : WelcomeScreen(),
+                  '/login': (BuildContext context) => WelcomeScreen(),
+                  '/main': (BuildContext context) => MainScreen()
                 }));
   }
 }

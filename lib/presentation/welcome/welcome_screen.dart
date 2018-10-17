@@ -5,16 +5,16 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-        body: new Container(
-            child: new Padding(
-                padding: new EdgeInsets.fromLTRB(32.0, MediaQuery.of(context).padding.top + 32.0, 32.0, 32.0),
-                child: new Column(
+    return Scaffold(
+        body: Container(
+            child: Padding(
+                padding: EdgeInsets.fromLTRB(32.0, MediaQuery.of(context).padding.top + 32.0, 32.0, 32.0),
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    new Expanded(
-                      child: new Center(
-                        child: new FlutterLogo(
+                    Expanded(
+                      child: Center(
+                        child: FlutterLogo(
                           size: 200.0,
                         ),
                       ),
