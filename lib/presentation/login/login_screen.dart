@@ -15,8 +15,7 @@ class LoginScreen extends StatefulWidget {
 class LoginScreenState extends State<LoginScreen> {
   static const redirectUrl = "http://www.orangesoft.by/";
   static const query = "code";
-  static const url =
-      "https://www.teamwork.com/launchpad/login?redirect_uri=$redirectUrl";
+  static const url = "https://www.teamwork.com/launchpad/login?redirect_uri=$redirectUrl";
   final webViewPlugin = new FlutterWebviewPlugin();
   final authRepository = AuthRepository();
   final profileRepository = ProfileRepository();
@@ -78,6 +77,5 @@ class LoginScreenState extends State<LoginScreen> {
   void _completed() {
     goToMain(context);
     webViewPlugin.close();
-    print('compele');
   }
 }

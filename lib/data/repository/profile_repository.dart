@@ -1,4 +1,5 @@
 import 'package:f_contacter/data/entity/user.dart';
+import 'package:f_contacter/data/preference/preference.dart';
 
 class ProfileRepository {
   static final _profileRepository = ProfileRepository._internal();
@@ -7,11 +8,15 @@ class ProfileRepository {
 
   factory ProfileRepository() => _profileRepository;
 
+  ProfilePrefs _profilePrefs = ProfilePrefs();
+
   void saveToken(String token) {
-    print('saveToken');
+    _profilePrefs.setToken(token);
   }
 
   void saveUser(User user) {
     print('saveUser');
   }
+
+  Future<bool> isAuthorized() async => _profilePrefs.isHaveToken();
 }
