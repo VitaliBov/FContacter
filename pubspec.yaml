@@ -18,6 +18,7 @@ dependencies:
   url_launcher: "^4.0.1"
   flutter_search_bar: "^2.0.7"
   flutter_webview_plugin: "^0.2.1+2"
+  flutter_svg: "^0.6.1+1"
 
 dev_dependencies:
   flutter_test:
@@ -27,3 +28,6 @@ flutter:
   uses-material-design: true
   assets:
     - assets/welcome_background.png
+    - assets/ic_contact.svg
+    - assets/ic_status.svg
+    - assets/ic_profile.svg

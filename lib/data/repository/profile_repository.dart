@@ -15,8 +15,10 @@ class ProfileRepository {
   }
 
   void saveUser(User user) {
-    print('saveUser');
+    _profilePrefs.setUser(user);
   }
+
+  Future<User> getUser() => _profilePrefs.getUser();
 
   Future<bool> isAuthorized() async => _profilePrefs.isHaveToken();
 }
