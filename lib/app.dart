@@ -1,55 +1,39 @@
-import 'package:f_contacter/data/repository/profile_repository.dart';
-import 'package:f_contacter/logging.dart';
-import 'package:f_contacter/presentation/login/login_screen.dart';
-import 'package:f_contacter/presentation/main/main_screen.dart';
-import 'package:f_contacter/scoped_model/app_model.dart';
+import 'package:f_contacter/presentation/bloc/app_bloc.dart';
+import 'package:f_contacter/presentation/bloc/bloc_provider.dart';
+import 'package:f_contacter/presentation/ui/login/login_screen.dart';
+import 'package:f_contacter/presentation/ui/login/welcome_screen.dart';
+import 'package:f_contacter/presentation/ui/main/main_screen.dart';
+import 'package:f_contacter/res/colors.dart';
+import 'package:f_contacter/res/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:scoped_model/scoped_model.dart';
 
-class ContacterApp extends StatefulWidget {
-  @override
-  ContacterAppState createState() => ContacterAppState();
-}
-
-class ContacterAppState extends State<ContacterApp> {
-  final profileRepository = ProfileRepository();
-  var isTokenLoaded = false;
-  var isTokenValid;
-
-  @override
-  void initState() {
-    checkToken();
-  }
-
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    if (isTokenLoaded) {
-      return ScopedModelDescendant<AppModel>(
-          builder: (context, child, model) =>
-              MaterialApp(
-                  title: "Contacter",
-                  theme: ThemeData.light(),
-                  routes: {
-                    '/': (BuildContext context) => isTokenValid
-                        ? new MainScreen()
-                        : new LoginScreen(),
-                    '/login': (BuildContext context) => new LoginScreen(),
-                    '/main': (BuildContext context) => new MainScreen()
-                  })
-      );
-    } else {
-      return Container();
-    }
-  }
-
-  void checkToken() async {
-    try {
-      isTokenValid = await profileRepository.isAuthorized();
-      setState(() {
-        isTokenLoaded = true;
-      });
-    } catch (e) {
-      printLog(e.toString());
-    }
+    final AppBloc appBloc = BlocProvider.of<AppBloc>(context);
+    return StreamBuilder(
+      stream: appBloc.isAuthorized,
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        if (snapshot.hasData) {
+          return MaterialApp(
+              title: AppStrings.appName,
+              theme: ThemeData(
+                brightness: Brightness.light,
+                primaryColor: AppColors.colorBackgroundDefault,
+                accentColor: AppColors.colorAccent,
+                backgroundColor: AppColors.colorBackgroundDefault
+              ),
+              routes: {
+                '/': (BuildContext context) => snapshot.data ? new MainScreen() : new WelcomeScreen(),
+                '/login': (BuildContext context) => new LoginScreen(),
+                '/main': (BuildContext context) => new MainScreen()
+              }
+          );
+        } else {
+          //TODO add splash
+          return Container();
+        }
+      }
+    );
   }
 }

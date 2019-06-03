@@ -1,24 +1,19 @@
-import 'package:f_contacter/data/entity/user.dart';
+import 'dart:async';
+import 'package:f_contacter/data/mapper/user_mapper.dart';
+import 'package:f_contacter/data/network/api_client.dart';
 import 'package:f_contacter/data/preference/preference.dart';
+import 'package:f_contacter/entity/user.dart';
 
 class ProfileRepository {
   static final _profileRepository = ProfileRepository._internal();
+  final ApiClient _apiClient = ApiClient();
+  final ProfilePrefs _profilePrefs = ProfilePrefs();
 
   ProfileRepository._internal();
-
   factory ProfileRepository() => _profileRepository;
 
-  ProfilePrefs _profilePrefs = ProfilePrefs();
-
-  void saveToken(String token) {
-    _profilePrefs.setToken(token);
-  }
-
-  void saveUser(User user) {
-    _profilePrefs.setUser(user);
-  }
-
-  Future<User> getUser() => _profilePrefs.getUser();
-
-  Future<bool> isAuthorized() async => _profilePrefs.isHaveToken();
+  Future<void> saveProfileLocal(User user) => _profilePrefs.setUser(user);
+  Future<void> clearProfileLocal() => _profilePrefs.setUser(null);
+  Future<User> getProfileLocal() => _profilePrefs.getUser();
+  Future<User> getProfileNetwork() async => userResponseToUser((await _apiClient.gerCurrentUser()).user);
 }

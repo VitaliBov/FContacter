@@ -1,4 +1,4 @@
-import 'package:f_contacter/data/entity/status.dart';
+import 'package:f_contacter/entity/status.dart';
 
 class User {
   int id;
@@ -13,6 +13,8 @@ class User {
   int companyId;
   String image;
   Status status;
+
+  User.empty();
 
   User(
       this.id,
@@ -40,10 +42,9 @@ class User {
         company = json['company'],
         companyId = json['companyId'],
         image = json['image'],
-        status = json['status'];
+        status = Status.fromJson(json['status']);
 
-  Map<String, dynamic> toJson() =>
-      {
+  Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
         'lastName': lastName,
@@ -55,6 +56,6 @@ class User {
         'company': company,
         'companyId': companyId,
         'image': image,
-        'status': status
+        'status': status.toJson()
       };
 }

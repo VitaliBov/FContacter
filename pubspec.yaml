@@ -1,10 +1,8 @@
 name: f_contacter
 description: A new Flutter application.
-
 version: 1.0.0+1
-
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -12,13 +10,16 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^0.1.2
-  http: ^0.11.3+17
-  scoped_model: "^0.3.0"
-  shared_preferences: "^0.4.3"
-  url_launcher: "^4.0.1"
-  flutter_search_bar: "^2.0.7"
-  flutter_webview_plugin: "^0.2.1+2"
-  flutter_svg: "^0.6.1+1"
+  rxdart: ^0.22.0
+  flutter_bloc: ^0.15.0
+  http: ^0.12.0+2
+  shared_preferences: ^0.5.2
+  url_launcher: ^5.0.2
+  flutter_search_bar: ^2.0.7
+  flutter_webview_plugin: ^0.3.4
+  flutter_svg: ^0.13.0+1
+  connectivity: ^0.4.3+1
+  path_drawing: ^0.4.1
 
 dev_dependencies:
   flutter_test:
@@ -28,6 +29,19 @@ flutter:
   uses-material-design: true
   assets:
     - assets/welcome_background.png
+    - assets/error_network.svg
+    - assets/error_other.svg
+    - assets/bubble.svg
     - assets/ic_contact.svg
     - assets/ic_status.svg
     - assets/ic_profile.svg
+    - assets/ic_phone.svg
+    - assets/ic_email.svg
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-SemiBold.otf
+        - asset: fonts/Poppins-Medium.otf
+        - asset: fonts/Poppins-Regular.otf
+        - asset: fonts/Poppins-Light.otf

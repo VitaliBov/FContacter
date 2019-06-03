@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="86px" version="1.1" viewBox="0 0 297 86"
+    width="297px" xmlns="http://www.w3.org/2000/svg">
+    <title>Combined Shape</title>
+    <g fill="none" fill-rule="evenodd" id="Page-1" stroke="none" stroke-dasharray="5"
+        stroke-width="1">
+        <g id="contact-open" stroke="#7A7A7A" transform="translate(-39.000000, -260.000000)">
+            <g id="Group-5" transform="translate(40.000000, 143.000000)">
+                <path
+                    d="M8,118 L287,118 C291.418278,118 295,121.581722 295,126 L295,194 C295,198.418278 291.418278,202 287,202 L8,202 C3.581722,202 5.41083001e-16,198.418278 0,194 L0,126 C-5.41083001e-16,121.581722 3.581722,118 8,118 Z"
+                    id="Combined-Shape"/>
+            </g>
+        </g>
+    </g>
+</svg>

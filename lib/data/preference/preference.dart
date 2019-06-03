@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:f_contacter/data/entity/user.dart';
+import 'package:f_contacter/entity/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePrefs {
@@ -39,7 +39,7 @@ class ProfilePrefs {
 
   Future<bool> setUser(User user) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    var userJson = json.encode(user);
+    var userJson = json.encode(user.toJson());
     return prefs.setString(_userKey, userJson);
   }
 }

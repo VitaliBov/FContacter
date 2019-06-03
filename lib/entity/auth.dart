@@ -1,4 +1,4 @@
-import 'package:f_contacter/data/entity/user.dart';
+import 'package:f_contacter/entity/user.dart';
 
 class Auth {
   String token;

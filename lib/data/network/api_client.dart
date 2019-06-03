@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:f_contacter/data/network/response/user_response.dart';
+import 'package:f_contacter/data/preference/preference.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:f_contacter/data/network/request/auth_request.dart';
@@ -7,7 +9,8 @@ import 'package:f_contacter/data/network/response/auth_response.dart';
 class ApiClient {
   static const String baseUrl = 'https://orangesoft.teamworkpm.net';
   static final _client = ApiClient._internal();
-  final JsonDecoder _decoder = new JsonDecoder();
+  final JsonDecoder _decoder = JsonDecoder();
+  final ProfilePrefs _profilePrefs = ProfilePrefs();
 
   ApiClient._internal();
 
@@ -46,5 +49,14 @@ class ApiClient {
     final responseJson = json.decode(response.body);
     print('Response: $responseJson');
     return AuthResponse.fromJson(responseJson);
+  }
+
+  Future<UserResponse> gerCurrentUser() async {
+    var url = baseUrl + 'me.json';
+    var headers = {"Content-Type": "application/json", "Authorization" : "Bearer ${_profilePrefs.getToken()}"};
+    final response = await http.post(url, headers: headers);
+    final responseJson = json.decode(response.body);
+    print('Response: $responseJson');
+    return UserResponse.fromJson(responseJson);
   }
 }
