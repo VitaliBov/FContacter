@@ -36,10 +36,10 @@ class AppStrings {
   static const no = "No";
 
   //Contacts screen
-  static const contacts_screen_name = "Contacts";
-//  static const contacts_header_title= "Hello, %1$s";
-//  static const contacts_header_description= "1$s wishes you a nice day :)";
-  static const contacts_action_search = "Search";
+  static const contactsScreenName = "Contacts";
+  static String contactsHeaderTitle(String name) => "Hello, $name";
+  static String contactsHeaderDescription(String name) => "$name wishes you a nice day :)";
+  static const contactsActionSearch = "Search";
 
   //Contact screen
   static const contactDefaultStatus = "string/default_status";
