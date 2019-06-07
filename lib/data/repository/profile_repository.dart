@@ -13,7 +13,7 @@ class ProfileRepository {
   factory ProfileRepository() => _profileRepository;
 
   Future<void> saveProfileLocal(User user) => _profilePrefs.setUser(user);
-  Future<void> clearProfileLocal() => _profilePrefs.setUser(null);
+  Future<void> clearProfileLocal() => _profilePrefs.clearUser();
   Future<User> getProfileLocal() => _profilePrefs.getUser();
-  Future<User> getProfileNetwork() async => userResponseToUser((await _apiClient.gerCurrentUser()).user);
+  Future<User> getProfileNetwork() async => userModelResponseToUser((await _apiClient.gerCurrentUser()).user);
 }

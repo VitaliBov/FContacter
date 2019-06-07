@@ -1,5 +1,3 @@
-import 'package:f_contacter/presentation/bloc/bloc_provider.dart';
-import 'package:f_contacter/presentation/bloc/profile_bloc.dart';
 import 'package:f_contacter/presentation/ui/profile/profile_screen.dart';
 import 'package:f_contacter/res/colors.dart';
 import 'package:f_contacter/res/images.dart';
@@ -66,12 +64,7 @@ class MainScreenState extends State<MainScreen> {
   ];
 
   Color _getColor(int i) => i == _page ? AppColors.colorAccent : AppColors.colorBottomBarDefault;
-  List<Widget> _getTabs() => [_profileTab, _profileTab, _profileTab];
-
-  Widget _profileTab = BlocProvider<ProfileBloc>(
-      bloc: ProfileBloc(),
-      child: ProfileScreen()
-  );
+  List<Widget> _getTabs() => [ProfileScreen(), ProfileScreen(), ProfileScreen()];
 
   void _onTabClick(int page) {
     _pageController.animateToPage(

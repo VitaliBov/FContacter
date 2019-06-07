@@ -20,6 +20,7 @@ class ProfilePrefs {
     }
   }
 
+  //TODO create getPreferences()
   Future<String> getToken() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString(_tokenKey);
@@ -41,5 +42,10 @@ class ProfilePrefs {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     var userJson = json.encode(user.toJson());
     return prefs.setString(_userKey, userJson);
+  }
+
+  Future<bool> clearUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString(_userKey, '');
   }
 }

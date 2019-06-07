@@ -1,7 +1,7 @@
 import 'package:f_contacter/entity/status.dart';
 
 class User {
-  int id;
+  String id;
   String name;
   String lastName;
   String fullName;
@@ -10,7 +10,7 @@ class User {
   String email;
   String position;
   String company;
-  int companyId;
+  String companyId;
   String image;
   Status status;
 

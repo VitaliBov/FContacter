@@ -9,16 +9,25 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  cupertino_icons: ^0.1.2
+  #RxDart
   rxdart: ^0.22.0
+  #Bloc
   flutter_bloc: ^0.15.0
+  equatable: ^0.2.6
+  #Network
+  connectivity: ^0.4.3+1
   http: ^0.12.0+2
-  shared_preferences: ^0.5.2
+  dio: ^2.1.6
   url_launcher: ^5.0.2
+  #Preferences
+  shared_preferences: ^0.5.2
+  #UI
   flutter_search_bar: ^2.0.7
   flutter_webview_plugin: ^0.3.4
+  #Images
+  cupertino_icons: ^0.1.2
   flutter_svg: ^0.13.0+1
-  connectivity: ^0.4.3+1
+  #Custom widgets
   path_drawing: ^0.4.1
 
 dev_dependencies:

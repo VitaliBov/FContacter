@@ -1,6 +1,6 @@
-import 'package:f_contacter/presentation/ui/widget/balls_widget.dart';
-import 'package:f_contacter/presentation/ui/widget/login_button.dart';
-import 'package:f_contacter/presentation/ui/widget/logo_widget.dart';
+import 'package:f_contacter/presentation/ui/welcome/balls_widget.dart';
+import 'package:f_contacter/presentation/ui/login/login_button.dart';
+import 'package:f_contacter/presentation/ui/welcome/logo_widget.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {

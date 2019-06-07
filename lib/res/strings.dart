@@ -35,23 +35,23 @@ class AppStrings {
   static const yes = "Yes";
   static const no = "No";
 
-//  <!--Contacts screen-->
-//  <string name="contacts_screen_name">Contacts</string>
-//  <string name="contacts_header_title">Hello, %1$s</string>
-//  <string name="contacts_header_description">%1$s wishes you a nice day :)</string>
-//  <string name="contacts_action_search">Search</string>
-//
-//  <!--Contact screen-->
-//  <string name="contact_default_status">@string/default_status</string>
-//  <string name="contact_button_save">+ Save contact</string>
-//  <string name="contact_phone_invalid">Invalid phone</string>
-//  <string name="contact_email_invalid">Invalid Email</string>
-//
-//  <!--News screen-->
-//  <string name="news_screen_name">Team\'s news</string>
-//  <string name="news_default_status">@string/default_status</string>
-//  <string name="news_update_today">Today</string>
-//  <string name="news_update_yesterday">Yesterday</string>
-//  <string name="news_update_long_time_ago">A long time ago</string>
-//  <string name="news_menu_change_status">Change status</string>
+  //Contacts screen
+  static const contacts_screen_name = "Contacts";
+//  static const contacts_header_title= "Hello, %1$s";
+//  static const contacts_header_description= "1$s wishes you a nice day :)";
+  static const contacts_action_search = "Search";
+
+  //Contact screen
+  static const contactDefaultStatus = "string/default_status";
+  static const contactButtonSave = "Save contact";
+  static const contactPhoneInvalid = "Invalid phone";
+  static const contactEmailInvalid = "Invalid Email";
+
+  //News screen
+  static const newsScreenName = "Team's news";
+  static String newsDefaultStatus(String name) => defaultStatus(name);
+  static const newsUpdateToday = "Today";
+  static const newsUpdateYesterday = "Yesterday";
+  static const newsUpdateLongTimeAgo = "A long time ago";
+  static const newsMenuChangeStatus = "Change status";
 }

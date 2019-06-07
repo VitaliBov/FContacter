@@ -1,19 +1,40 @@
-class UserResponse {
-  String status;
+import 'package:f_contacter/data/network/response/base_response.dart';
+
+class UsersResponse extends BaseResponse {
+  List<UserModelResponse> users;
+
+  UsersResponse._({
+    this.users
+  });
+
+  factory UsersResponse.fromJson(Map<String, dynamic> json) {
+    var response = UsersResponse._(
+        users: json['people']
+    );
+    response.statusMessage = json['STATUS'];
+    return response;
+  }
+}
+
+
+class UserResponse extends BaseResponse {
   UserModelResponse user;
 
-  UserResponse._({this.status, this.user});
+  UserResponse._({
+    this.user
+  });
 
   factory UserResponse.fromJson(Map<String, dynamic> json) {
-    return UserResponse._(
-        status: json['STATUS'],
-        user: json['user']
+    var response = UserResponse._(
+        user: UserModelResponse.fromJson(json['person'])
     );
+    response.statusMessage = json['STATUS'];
+    return response;
   }
 }
 
 class UserModelResponse {
-  int id;
+  String id;
   String firstName;
   String lastName;
   String phoneNumberMobile;

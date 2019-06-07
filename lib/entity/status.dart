@@ -1,10 +1,14 @@
 class Status {
-  int ownerId;
+  String ownerId;
   String text;
   String dateOfChange;
   String dateOfChangeTitle;
 
-  Status(this.ownerId, this.text, this.dateOfChange, this.dateOfChangeTitle);
+  Status(
+      this.ownerId,
+      this.text,
+      this.dateOfChange,
+      this.dateOfChangeTitle);
 
   Status.fromJson(Map<String, dynamic> json) :
         ownerId = json['ownerId'],

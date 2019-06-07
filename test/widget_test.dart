@@ -1,4 +1,4 @@
-import 'package:f_contacter/app.dart';
+import 'package:f_contacter/presentation/ui/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
