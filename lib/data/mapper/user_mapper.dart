@@ -6,9 +6,9 @@ import 'package:f_contacter/res/strings.dart';
 
 List<User> usersResponseToUsers(UsersResponse response) {
   List<User> list = List();
-  response.users.map((userResponse) =>
-      list.add(userModelResponseToUser(userResponse))
-  );
+  response.users.forEach((userResponse) {
+    list.add(userModelResponseToUser(userResponse));
+  });
   return list;
 }
 

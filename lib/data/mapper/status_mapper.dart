@@ -4,7 +4,7 @@ import 'package:f_contacter/res/strings.dart';
 
 List<Status> statusesResponseToStatuses(StatusesResponse response) {
   List<Status> list = List();
-  response.userStatuses.map((statusResponse) =>
+  response.userStatuses.forEach((statusResponse) =>
       list.add(statusBodyToStatus(statusResponse))
   );
   return list;

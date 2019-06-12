@@ -43,7 +43,7 @@ class AppStrings {
 
   //Contact screen
   static const contactDefaultStatus = "string/default_status";
-  static const contactButtonSave = "Save contact";
+  static const contactButtonSave = "+   Save contact";
   static const contactPhoneInvalid = "Invalid phone";
   static const contactEmailInvalid = "Invalid Email";
 

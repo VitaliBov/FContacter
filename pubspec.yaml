@@ -27,8 +27,12 @@ dependencies:
   #Images
   cupertino_icons: ^0.1.2
   flutter_svg: ^0.13.0+1
+  cached_network_image: ^0.8.0
+  photo_view: ^0.4.0
   #Custom widgets
   path_drawing: ^0.4.1
+  #List
+  queries: ^0.1.12
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +50,8 @@ flutter:
     - assets/ic_profile.svg
     - assets/ic_phone.svg
     - assets/ic_email.svg
+    - assets/user.svg
+    - assets/ic_arrow.svg
 
   fonts:
     - family: Poppins

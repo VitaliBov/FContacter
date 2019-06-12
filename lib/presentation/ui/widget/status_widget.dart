@@ -39,18 +39,10 @@ class _StatusBorderWidget extends StatefulWidget {
   final String status;
   final double height, width;
 
-  State<StatefulWidget> createState() => _StatusBorderWidgetState(status, height, width);
+  State<StatefulWidget> createState() => _StatusBorderWidgetState();
 }
 
 class _StatusBorderWidgetState extends State<_StatusBorderWidget> {
-  _StatusBorderWidgetState(
-      this.status,
-      this.height,
-      this.width
-  );
-
-  final String status;
-  final double height, width;
   final List<Offset> points = List();
 
   @override
@@ -66,8 +58,8 @@ class _StatusBorderWidgetState extends State<_StatusBorderWidget> {
     return CustomPaint(
         painter: _StatusPainter(points),
         child: SizedBox(
-          width: width,
-          height: height,
+          width: widget.width,
+          height: widget.height,
           child: _statusText(),
         )
     );
@@ -78,7 +70,7 @@ class _StatusBorderWidgetState extends State<_StatusBorderWidget> {
         child: Container(
             alignment: Alignment.center,
             child: Text(
-                status,
+                widget.status,
                 textAlign: TextAlign.center,
                 maxLines: 5,
                 style: TextStyle(
@@ -92,10 +84,10 @@ class _StatusBorderWidgetState extends State<_StatusBorderWidget> {
 
   _initPoints() {
     double xStart = 0;
-    double xMiddle = width/2;
-    double xEnd = width;
+    double xMiddle = widget.width/2;
+    double xEnd = widget.width;
     double yStart = 0;
-    double yEnd = height;
+    double yEnd = widget.height;
     double cornerXOffset = 7;
     double cornerYOffset = 13;
     double cornerRadius = 7;

@@ -9,7 +9,7 @@ class UsersResponse extends BaseResponse {
 
   factory UsersResponse.fromJson(Map<String, dynamic> json) {
     var response = UsersResponse._(
-        users: json['people']
+        users: json['people'].map<UserModelResponse>((json) => UserModelResponse.fromJson(json)).toList()
     );
     response.statusMessage = json['STATUS'];
     return response;

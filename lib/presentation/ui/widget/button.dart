@@ -7,12 +7,10 @@ class Button extends StatelessWidget {
   Button({
     Key key,
     this.title,
-    this.icon,
     this.onTap
   }) : super(key: key);
 
   final String title;
-  final String icon;
   final VoidCallback onTap;
   final double _elevation = 8.0;
   final double _shadowRadius = 20.0;

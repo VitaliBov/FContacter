@@ -1,3 +1,4 @@
+import 'package:f_contacter/presentation/ui/contacts/contacts_screen.dart';
 import 'package:f_contacter/presentation/ui/profile/profile_screen.dart';
 import 'package:f_contacter/res/colors.dart';
 import 'package:f_contacter/res/images.dart';
@@ -64,7 +65,7 @@ class MainScreenState extends State<MainScreen> {
   ];
 
   Color _getColor(int i) => i == _page ? AppColors.colorAccent : AppColors.colorBottomBarDefault;
-  List<Widget> _getTabs() => [ProfileScreen(), ProfileScreen(), ProfileScreen()];
+  List<Widget> _getTabs() => [ContactsScreen(), ProfileScreen(), ProfileScreen()];
 
   void _onTabClick(int page) {
     _pageController.animateToPage(

@@ -113,6 +113,7 @@ class ProfileState extends State<ProfileScreen> {
   //TODO add loading widget
   Widget _loadingWidget() => Scaffold(
     body: Container(
+        alignment: Alignment.center,
         child: CircularProgressIndicator()
     )
   );

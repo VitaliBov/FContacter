@@ -23,6 +23,8 @@ class ProfileBloc extends Bloc<ProfileBlocEvent, ProfileBlocState> {
         var networkUser = await  _profileRepository.getProfileNetwork();
         networkUser.status = await _statusRepository.getCurrentUserStatusFromNetwork();
         yield ProfileBlocStateSuccess(networkUser);
+
+        _profileRepository.saveProfileLocal(networkUser);
       } catch (error) {
         yield ProfileBlocStateError(error);
       }

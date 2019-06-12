@@ -11,4 +11,8 @@ class AppImages {
 
   static const icPhone = 'assets/ic_phone.svg';
   static const icEmail = 'assets/ic_email.svg';
+
+  static const icArrow = 'assets/ic_arrow.svg';
+
+  static const avatarPlaceholder = 'assets/user.svg';
 }
