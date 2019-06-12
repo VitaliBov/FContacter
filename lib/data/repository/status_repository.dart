@@ -11,7 +11,7 @@ class StatusRepository {
   factory StatusRepository() => _statusRepository;
 
   Future<List<Status>> getUsersStatusesFromNetwork() async => statusesResponseToStatuses(await _apiClient.gerStatuses());
-  Future<Status> getUserStatusFromNetwork(int userId) async => statusResponseToStatus(await _apiClient.gerStatus(userId));
+  Future<Status> getUserStatusFromNetwork(int userId, String name) async => statusResponseToStatus(await _apiClient.gerStatus(userId), name: name);
   Future<Status> getCurrentUserStatusFromNetwork() async => statusResponseToStatus(await _apiClient.gerCurrentUserStatus());
   Future<bool> createCurrentUserStatus(StatusRequest request) async => (await _apiClient.createCurrentUserStatus(request)).statusMessage == 'OK';
 }

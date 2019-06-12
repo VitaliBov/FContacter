@@ -17,8 +17,8 @@ class ContactBloc extends Bloc<ContactBlocEvent, ContactBlocState> {
   Stream<ContactBlocState> mapEventToState(ContactBlocEvent event) async* {
     if (event is ContactBlocEventLoad) {
       try {
-        var networkUser = await  _profileRepository.getUserFromNetwork(int.parse(event.id));
-        networkUser.status = await _statusRepository.getCurrentUserStatusFromNetwork();
+        var networkUser = await  _profileRepository.getUserFromNetwork(int.parse(event.user.id));
+        networkUser.status = await _statusRepository.getUserStatusFromNetwork(int.parse(event.user.id), event.user.name);
         yield ContactBlocStateSuccess(networkUser);
       } catch (error) {
         yield ContactBlocStateError(error);

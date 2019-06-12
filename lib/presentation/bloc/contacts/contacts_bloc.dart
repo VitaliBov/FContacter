@@ -4,7 +4,6 @@ import 'package:f_contacter/data/repository/status_repository.dart';
 import 'package:f_contacter/data/repository/users_repository.dart';
 import 'package:f_contacter/entity/status.dart';
 import 'package:f_contacter/entity/user.dart';
-import 'package:f_contacter/logging.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_event.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_state.dart';
 import 'package:f_contacter/presentation/ui/contacts/contacts_items.dart';
@@ -27,28 +26,29 @@ class ContactsBloc extends Bloc<ContactsBlocEvent, ContactsBlocState> {
         var users = await _usersRepository.getUsersFromNetwork(companyId);
         var statuses = await _statusRepository.getUsersStatusesFromNetwork();
         //add statuses
-        users.map((user) {
-          var status = statuses.firstWhere((status) => status.ownerId == user.id, orElse: () => null);
-          printLog("status: ${status.text}");
-          user.status = status.text ?? _getDefaultStatus(user);
-          return user;
-        });
-        users.forEach((s) {
-//          printLog("status: ${s.status.text}");
-        });
-        //TOdO parsing statuses
+        users = _getUsersWithStatuses(users, statuses);
         //sort by name
         users.sort((a, b) => a.fullName.compareTo(b.fullName));
         //remove current user
         var currentUser = users.firstWhere((user) => user.id == localUser.id, orElse: () {});
         users.remove(currentUser);
-
+        //result
         var contacts = _getContactsItemsList(_getWelcome(currentUser.name), _getWish(currentUser.company), users, currentUser);
         yield ContactsBlocStateSuccess(contacts);
       } catch (error) {
         yield ContactsBlocStateError(error);
       }
     }
+  }
+
+  List<User> _getUsersWithStatuses(List<User> users, List<Status> statuses) {
+    var result = List<User>();
+    users.forEach((user) {
+      var status = statuses.firstWhere((status) => status.ownerId == user.id, orElse: () => null);
+      user.status = status ?? _getDefaultStatus(user);
+      result.add(user);
+    });
+    return result;
   }
 
   Status _getDefaultStatus(User user) => Status(

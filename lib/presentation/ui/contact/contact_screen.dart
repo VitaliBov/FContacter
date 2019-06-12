@@ -27,7 +27,7 @@ class ContactState extends State<ContactScreen> {
   void initState() {
     super.initState();
     _contactBloc = ContactBloc();
-    _contactBloc.dispatch(ContactBlocEventLoad(widget.user.id));
+    _contactBloc.dispatch(ContactBlocEventLoad(widget.user));
   }
 
   @override
