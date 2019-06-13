@@ -7,3 +7,9 @@ abstract class ContactsBlocEvent extends Equatable {
 class ContactsBlocEventLoad extends ContactsBlocEvent {
   ContactsBlocEventLoad() : super();
 }
+
+class ContactsBlocEventFilter extends ContactsBlocEvent {
+  String query;
+
+  ContactsBlocEventFilter(this.query) : super([query]);
+}

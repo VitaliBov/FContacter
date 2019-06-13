@@ -13,6 +13,7 @@ class AppImages {
   static const icEmail = 'assets/ic_email.svg';
 
   static const icArrow = 'assets/ic_arrow.svg';
+  static const icSearch = 'assets/ic_search.svg';
 
   static const avatarPlaceholder = 'assets/user.svg';
 }

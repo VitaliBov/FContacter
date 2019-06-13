@@ -1,3 +1,5 @@
+import 'package:f_contacter/loader_search_bar/loader_search_bar.dart';
+import 'package:f_contacter/logging.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_event.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_state.dart';
@@ -7,9 +9,11 @@ import 'package:f_contacter/presentation/ui/contacts/contacts_items.dart';
 import 'package:f_contacter/presentation/ui/contacts/contacts_top_header_widget.dart';
 import 'package:f_contacter/presentation/ui/widget/draggable_scrollbar.dart';
 import 'package:f_contacter/res/colors.dart';
+import 'package:f_contacter/res/images.dart';
 import 'package:f_contacter/res/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactsScreen extends StatefulWidget {
   ContactsScreen({Key key}) : super(key: key);
@@ -44,10 +48,7 @@ class ContactsState extends State<ContactsScreen> {
             builder: (context, state) {
               if (state is ContactsBlocStateSuccess) {
                 return Scaffold(
-                    appBar: AppBar(
-                        title: const Text(AppStrings.contactsScreenName),
-                        elevation: 0.0
-                    ),
+                    appBar: _appBar(),
                     body: _listWidget(state.contacts)
                 );
               }
@@ -61,6 +62,27 @@ class ContactsState extends State<ContactsScreen> {
             }
     );
   }
+
+  Widget _appBar() => SearchBar(
+      defaultBar: AppBar(
+          title: const Text(AppStrings.contactsScreenName),
+          elevation: 0.0
+      ),
+      searchItem: SearchItem.action(
+          builder: (_) => IconButton(
+            icon: SvgPicture.asset(AppImages.icSearch),
+            onPressed: () {},
+          )
+      ),
+      searchHint: AppStrings.contactsActionSearch,
+      attrs: SearchBarAttrs(
+          secondaryDetailColor: AppColors.colorAccent
+      ),
+      onQueryChanged: (query) => _onQueryChanged(context, query),
+      controller: SearchBarController(
+          onActivatedChanged: (isActivate) => _onActivatedChanged(isActivate)
+      )
+  );
 
   Widget _listWidget(List<ContactsListItem> contacts) {
     return DraggableScrollbar.rrect(
@@ -94,5 +116,13 @@ class ContactsState extends State<ContactsScreen> {
         title,
         style: TextStyle(color: AppColors.colorAccent)
     );
+  }
+
+  _onQueryChanged(BuildContext context, String query) {
+    _contactsBloc.dispatch(ContactsBlocEventFilter(query));
+  }
+
+  _onActivatedChanged(bool isActivate) {
+    _contactsBloc.dispatch(ContactsBlocEventFilter(""));
   }
 }

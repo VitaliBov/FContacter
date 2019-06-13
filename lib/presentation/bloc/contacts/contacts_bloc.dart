@@ -4,6 +4,7 @@ import 'package:f_contacter/data/repository/status_repository.dart';
 import 'package:f_contacter/data/repository/users_repository.dart';
 import 'package:f_contacter/entity/status.dart';
 import 'package:f_contacter/entity/user.dart';
+import 'package:f_contacter/logging.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_event.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_state.dart';
 import 'package:f_contacter/presentation/ui/contacts/contacts_items.dart';
@@ -13,6 +14,8 @@ class ContactsBloc extends Bloc<ContactsBlocEvent, ContactsBlocState> {
   UsersRepository _usersRepository = UsersRepository();
   ProfileRepository _profileRepository = ProfileRepository();
   StatusRepository _statusRepository = StatusRepository();
+  List<User> users;
+  List<ContactsListItem> contacts;
 
   @override
   ContactsBlocState get initialState => ContactsBlocStateLoading();
@@ -29,16 +32,42 @@ class ContactsBloc extends Bloc<ContactsBlocEvent, ContactsBlocState> {
         users = _getUsersWithStatuses(users, statuses);
         //sort by name
         users.sort((a, b) => a.fullName.compareTo(b.fullName));
+        this.users = users;
         //remove current user
         var currentUser = users.firstWhere((user) => user.id == localUser.id, orElse: () {});
         users.remove(currentUser);
         //result
-        var contacts = _getContactsItemsList(_getWelcome(currentUser.name), _getWish(currentUser.company), users, currentUser);
+        contacts = _getContactsItemsList(_getWelcome(currentUser.name), _getWish(currentUser.company), users, currentUser);
         yield ContactsBlocStateSuccess(contacts);
       } catch (error) {
         yield ContactsBlocStateError(error);
       }
+    } else if (event is ContactsBlocEventFilter) {
+      try {
+        if (event.query.isEmpty) {
+          yield ContactsBlocStateSuccess(contacts);
+        } else {
+          var filteredContacts = List<ContactsListItem>();
+          users.forEach((user) {
+            if (user.fullName.contains(event.query)) {
+              filteredContacts.add(ContactsItem(user));
+            }
+          });
+          yield ContactsBlocStateSuccess(filteredContacts);
+        }
+      } catch (error, stacktrace) {
+        printLog("$stacktrace");
+//        yield ContactsBlocStateError(error);
+      }
     }
+  }
+
+  _loadContacts() {
+
+  }
+
+  _filterContacts() {
+
   }
 
   List<User> _getUsersWithStatuses(List<User> users, List<Status> statuses) {

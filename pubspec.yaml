@@ -52,6 +52,7 @@ flutter:
     - assets/ic_email.svg
     - assets/user.svg
     - assets/ic_arrow.svg
+    - assets/ic_search.svg
 
   fonts:
     - family: Poppins
