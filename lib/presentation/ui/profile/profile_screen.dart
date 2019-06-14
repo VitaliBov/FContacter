@@ -19,7 +19,7 @@ class ProfileScreen extends StatefulWidget {
   State createState() => ProfileState();
 }
 
-class ProfileState extends State<ProfileScreen> {
+class ProfileState extends State<ProfileScreen> with AutomaticKeepAliveClientMixin<ProfileScreen> {
   ProfileBloc _profileBloc;
   LogoutBloc _logoutBloc;
 
@@ -157,4 +157,7 @@ class ProfileState extends State<ProfileScreen> {
             ]
         );
       });
+
+  @override
+  bool get wantKeepAlive => true;
 }

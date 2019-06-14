@@ -1,5 +1,4 @@
 import 'package:f_contacter/loader_search_bar/loader_search_bar.dart';
-import 'package:f_contacter/logging.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_event.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_state.dart';
@@ -22,7 +21,7 @@ class ContactsScreen extends StatefulWidget {
   State createState() => ContactsState();
 }
 
-class ContactsState extends State<ContactsScreen> {
+class ContactsState extends State<ContactsScreen> with AutomaticKeepAliveClientMixin<ContactsScreen> {
   ContactsBloc _contactsBloc;
   ScrollController _scrollController;
   final _itemExtent = 100.0;
@@ -125,4 +124,7 @@ class ContactsState extends State<ContactsScreen> {
   _onActivatedChanged(bool isActivate) {
     _contactsBloc.dispatch(ContactsBlocEventFilter(""));
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

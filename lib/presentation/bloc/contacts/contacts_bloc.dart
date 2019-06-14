@@ -4,7 +4,6 @@ import 'package:f_contacter/data/repository/status_repository.dart';
 import 'package:f_contacter/data/repository/users_repository.dart';
 import 'package:f_contacter/entity/status.dart';
 import 'package:f_contacter/entity/user.dart';
-import 'package:f_contacter/logging.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_event.dart';
 import 'package:f_contacter/presentation/bloc/contacts/contacts_bloc_state.dart';
 import 'package:f_contacter/presentation/ui/contacts/contacts_items.dart';
@@ -21,53 +20,52 @@ class ContactsBloc extends Bloc<ContactsBlocEvent, ContactsBlocState> {
   ContactsBlocState get initialState => ContactsBlocStateLoading();
 
   @override
-  Stream<ContactsBlocState> mapEventToState(ContactsBlocEvent event) async* {
+  Stream<ContactsBlocState> mapEventToState(ContactsBlocEvent event) {
     if (event is ContactsBlocEventLoad) {
-      try {
-        var localUser = await _profileRepository.getProfileLocal();
-        var companyId = int.parse(localUser.companyId);
-        var users = await _usersRepository.getUsersFromNetwork(companyId);
-        var statuses = await _statusRepository.getUsersStatusesFromNetwork();
-        //add statuses
-        users = _getUsersWithStatuses(users, statuses);
-        //sort by name
-        users.sort((a, b) => a.fullName.compareTo(b.fullName));
-        this.users = users;
-        //remove current user
-        var currentUser = users.firstWhere((user) => user.id == localUser.id, orElse: () {});
-        users.remove(currentUser);
-        //result
-        contacts = _getContactsItemsList(_getWelcome(currentUser.name), _getWish(currentUser.company), users, currentUser);
-        yield ContactsBlocStateSuccess(contacts);
-      } catch (error) {
-        yield ContactsBlocStateError(error);
-      }
+      return _loadContacts();
     } else if (event is ContactsBlocEventFilter) {
-      try {
-        if (event.query.isEmpty) {
-          yield ContactsBlocStateSuccess(contacts);
-        } else {
-          var filteredContacts = List<ContactsListItem>();
-          users.forEach((user) {
-            if (user.fullName.contains(event.query)) {
-              filteredContacts.add(ContactsItem(user));
-            }
-          });
-          yield ContactsBlocStateSuccess(filteredContacts);
-        }
-      } catch (error, stacktrace) {
-        printLog("$stacktrace");
-//        yield ContactsBlocStateError(error);
-      }
+      return _filterContacts(event.query);
     }
   }
 
-  _loadContacts() {
-
+  Stream<ContactsBlocState> _loadContacts() async* {
+    try {
+      var localUser = await _profileRepository.getProfileLocal();
+      var companyId = int.parse(localUser.companyId);
+      var users = await _usersRepository.getUsersFromNetwork(companyId);
+      var statuses = await _statusRepository.getUsersStatusesFromNetwork();
+      //add statuses
+      users = _getUsersWithStatuses(users, statuses);
+      //sort by name
+      users.sort((a, b) => a.fullName.compareTo(b.fullName));
+      this.users = users;
+      //remove current user
+      var currentUser = users.firstWhere((user) => user.id == localUser.id, orElse: () {});
+      users.remove(currentUser);
+      //result
+      contacts = _getContactsItemsList(_getWelcome(currentUser.name), _getWish(currentUser.company), users, currentUser);
+      yield ContactsBlocStateSuccess(contacts);
+    } catch (error) {
+      yield ContactsBlocStateError(error);
+    }
   }
 
-  _filterContacts() {
-
+  Stream<ContactsBlocState> _filterContacts(String query) async* {
+    try {
+      if (query.isEmpty) {
+        yield ContactsBlocStateSuccess(contacts);
+      } else {
+        var filteredContacts = List<ContactsListItem>();
+        users.forEach((user) {
+          if (user.fullName.contains(query)) {
+            filteredContacts.add(ContactsItem(user));
+          }
+        });
+        yield ContactsBlocStateSuccess(filteredContacts);
+      }
+    } catch (error) {
+//        yield ContactsBlocStateError(error);
+    }
   }
 
   List<User> _getUsersWithStatuses(List<User> users, List<Status> statuses) {
